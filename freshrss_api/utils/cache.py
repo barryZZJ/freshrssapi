@@ -36,7 +36,7 @@ class FeedCache:
         return self._feeds
 
     def dump(self, feeds_file: Path = FILE_FEEDS):
-        feed_dicts = [feed.model_dump(mode='json')
+        feed_dicts = [feed.model_dump(mode='json', by_alias=True)
                  for feed in self._feeds.values()]
         with feeds_file.open('w', encoding='utf8') as f:
             json.dump(feed_dicts, f, ensure_ascii=False)
