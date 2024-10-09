@@ -7,7 +7,8 @@ from freshrss_api.utils.md5 import md5
 from freshrss_api.models import *
 
 ItemId = TypeVar('ItemId', bound=int)
-ItemIds = Union[list[ItemId], str]
+ItemIdsStr = TypeVar('ItemIdsStr', bound=str)  # string joined with ','
+ItemIds = Union[list[ItemId], ItemIdsStr]
 
 
 class FreshrssApi:

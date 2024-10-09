@@ -1,7 +1,7 @@
 from freshrss_api.api import FreshrssApi
 from freshrss_api.utils.cache import FeedCache
 from freshrss_api.utils.conf import load_conf
-from freshrss_api.utils.consts import CONF, FILE_FEEDS
+from freshrss_api.utils.consts import CONF, CACHE_FILE_FEEDS
 
 config = load_conf(CONF)
 
@@ -10,11 +10,11 @@ manager = FreshrssApi(config['username'], config['api_password'], config['api_ur
 assert manager.is_authenticated(), 'authentication failed!'
 
 feed_cache = FeedCache()
-if FILE_FEEDS.is_file():
-    feed_cache.load_from_file(FILE_FEEDS)
+if CACHE_FILE_FEEDS.is_file():
+    feed_cache.load_from_file(CACHE_FILE_FEEDS)
 else:
     feed_cache.load_from_api(manager)
-    feed_cache.dump(FILE_FEEDS)
+    feed_cache.dump(CACHE_FILE_FEEDS)
 
 model_unread = manager.unread_item_ids()
 
@@ -28,7 +28,7 @@ for rssitem in rssitems:
     except KeyError:
         feed_cache.update(manager)
         feed = feed_cache[rssitem.feed_id]
-        feed_cache.dump(FILE_FEEDS)
+        feed_cache.dump(CACHE_FILE_FEEDS)
 
     print(feed.title)
     print()

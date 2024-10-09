@@ -4,4 +4,4 @@ ROOT = Path(__file__).parents[2]
 
 CONF = ROOT / 'config.json'
 
-FILE_FEEDS = ROOT / 'feeds.json'
+CACHE_FILE_FEEDS = ROOT / 'feeds_cache.json'

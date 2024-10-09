@@ -16,6 +16,9 @@ class RSSItem(BaseModel):
     is_read: bool
     created_on_time: datetime.datetime
 
+    def __str__(self):
+        return ', '.join(f'{k}:{v}' for k, v in self.model_dump())
+
 
 class RSSFeed(BaseModel):
     feed_id: int = Field(..., alias='id')
