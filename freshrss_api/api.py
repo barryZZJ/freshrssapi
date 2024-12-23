@@ -66,7 +66,7 @@ class FreshrssApi:
             items=None,
         )
 
-        if sum(item is not None for item in (max_id, with_ids, since_id)) > 1:
+        if sum(ids is not None for ids in (max_id, with_ids, since_id)) > 1:
             raise ValueError('At most one of `max_id`, `with_ids`, `since_id` can be passed!')
 
         if max_id is not None:

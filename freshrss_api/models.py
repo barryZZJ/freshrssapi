@@ -6,6 +6,7 @@ from freshrss_api.utils.validator import parse_ids
 
 
 class RSSItem(BaseModel):
+    """一个文章"""
     item_id: int = Field(..., alias='id')
     feed_id: int
     title: str
@@ -21,6 +22,7 @@ class RSSItem(BaseModel):
 
 
 class RSSFeed(BaseModel):
+    """一个订阅源，包含一组文章。id是纯数字，对应网页参数里的get=f_<id>，如get=f_32"""
     feed_id: int = Field(..., alias='id')
     favicon_id: int
     title: str
@@ -31,11 +33,13 @@ class RSSFeed(BaseModel):
 
 
 class RSSGroup(BaseModel):
+    """一个组。id是纯数字，对应网页参数里的get=c_<id>，如get=c_5"""
     group_id: int = Field(..., alias='id')
     title: str
 
 
 class RSSFeedGroup(BaseModel):
+    """一个组里包含的订阅源列表"""
     group_id: int
     feed_ids: list[int]
 
@@ -75,7 +79,7 @@ class RespGroups(RespAuthed):
     groups: list[RSSGroup]
     """group id and group title"""
     feeds_groups: list[RSSFeedGroup]
-    """feed ids of which belongs to some group"""
+    """feed ids contained in each group, key: group id, value: list of feed ids"""
 
 
 class RespUnreadItemIds(RespAuthed):
